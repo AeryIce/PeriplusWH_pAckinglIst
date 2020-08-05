@@ -24,7 +24,9 @@ Module ModuleKoneksi
 	Sub KonekDbINV()
 		Try
 			Conn = New SqlConnection("Server = SRV4; Initial Catalog = INV ; User Id = Sa ; Password = ")
+			Conn.Open()
 			FormPackingList.LabelStatusKoneksiINV.Text = "INV OK"
+
 
 		Catch ex As Exception
 			FormPackingList.LabelStatusKoneksiINV.Text = "INV Fail"
