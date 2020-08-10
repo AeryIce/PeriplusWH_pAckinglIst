@@ -27,6 +27,8 @@ Public Class FormPackingList
         DGVPL.ReadOnly = True
     End Sub
     Private Sub FormPackingList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'TODO: This line of code loads data into the 'INVDataSet1.Packing_List' table. You can move, or remove it, as needed.
+        Me.Packing_ListTableAdapter.Fill(Me.INVDataSet1.Packing_List)
         'TODO: This line of code loads data into the 'INVDataSet2.Packing_List' table. You can move, or remove it, as needed.
 
 
@@ -83,6 +85,7 @@ Public Class FormPackingList
                 TextBoxKodeBuku.Text = Dr.Item("OPTFLD4")
             Else
                 MsgBox("Data Tidak Ada")
+                Call BersihkanInput()
             End If
             TextBoxMasukanQTY.Focus()
 
@@ -92,7 +95,7 @@ Public Class FormPackingList
 
     Private Sub TextBoxMasukanQTY_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TextBoxMasukanQTY.KeyPress
         If e.KeyChar = Chr(13) Then
-            ButtonSave.Focus()
+            ButtonSave.PerformClick()
         End If
 
     End Sub
@@ -137,6 +140,8 @@ Public Class FormPackingList
                     Da.Fill(Ds)
                     DGVPL.DataSource = Ds.Tables(0)
                     DGVPL.ReadOnly = True
+
+
                 Else
                     If MsgBox("Data Tidak Ada, Ulangi Pencarian?", MsgBoxStyle.YesNo, "Konfirmasi") = MsgBoxResult.Yes Then
                         ComboBoxCari.Text = ""
@@ -218,6 +223,18 @@ Public Class FormPackingList
         TextBoxKoli.Text = ""
         TextBoxBox.Text = ""
         TextBoxPetugas.Text = ""
+    End Sub
+
+    Private Sub TextBoxCari_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TextBoxCari.KeyPress
+        If e.KeyChar = Chr(13) Then
+            ButtonSearch.PerformClick()
+
+        End If
+
+    End Sub
+
+    Private Sub TextBoxMasukanQTY_TextChanged(sender As Object, e As EventArgs) Handles TextBoxMasukanQTY.TextChanged
+
     End Sub
 
     'Private Sub PrintDocument1_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles PrintDocument1.PrintPage

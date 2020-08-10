@@ -54,30 +54,36 @@ Partial Class FormPackingList
 		Me.ButtonSearch = New System.Windows.Forms.Button()
 		Me.LabelStatusKoneksiINV = New System.Windows.Forms.Label()
 		Me.DGVPL = New System.Windows.Forms.DataGridView()
+		Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+		Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+		Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+		Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+		Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+		Me.DataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+		Me.DataGridViewTextBoxColumn7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+		Me.DataGridViewTextBoxColumn8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+		Me.DataGridViewTextBoxColumn9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+		Me.DataGridViewTextBoxColumn10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+		Me.PackingListBindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
+		Me.INVDataSet1 = New PeriplusWH_pAckinglIst.INVDataSet1()
+		Me.PackingListBindingSource = New System.Windows.Forms.BindingSource(Me.components)
 		Me.ButtonCetak = New System.Windows.Forms.Button()
 		Me.ButtonExit = New System.Windows.Forms.Button()
 		Me.LabelJmlQty = New System.Windows.Forms.Label()
 		Me.LabelQty = New System.Windows.Forms.Label()
 		Me.LabelJmlItem = New System.Windows.Forms.Label()
 		Me.LabelItem = New System.Windows.Forms.Label()
-
-		Me.PackingListBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-
-		Me.PaletDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-		Me.KoliDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-		Me.BoxDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-		Me.PlIdDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-		Me.PetugasDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-		Me.ISBNDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-		Me.KodeBukuDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-		Me.JudulDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-		Me.QtyDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-		Me.TanggalDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+		Me.INVDataSet = New PeriplusWH_pAckinglIst.INVDataSet()
+		Me.INVDataSetBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+		Me.Packing_ListTableAdapter = New PeriplusWH_pAckinglIst.INVDataSet1TableAdapters.Packing_ListTableAdapter()
 		Me.GroupBoxInput.SuspendLayout()
 		Me.GroupBoxCRUD.SuspendLayout()
 		CType(Me.DGVPL, System.ComponentModel.ISupportInitialize).BeginInit()
-
+		CType(Me.PackingListBindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.INVDataSet1, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.PackingListBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.INVDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.INVDataSetBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.SuspendLayout()
 		'
 		'LabelStatusKoneksiBRDJKT
@@ -417,19 +423,106 @@ Partial Class FormPackingList
 		'
 		'DGVPL
 		'
+		Me.DGVPL.AllowUserToAddRows = False
+		Me.DGVPL.AllowUserToDeleteRows = False
 		Me.DGVPL.AutoGenerateColumns = False
 		Me.DGVPL.BackgroundColor = System.Drawing.Color.Azure
 		Me.DGVPL.BorderStyle = System.Windows.Forms.BorderStyle.None
 		Me.DGVPL.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
 		Me.DGVPL.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-		Me.DGVPL.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.PaletDataGridViewTextBoxColumn, Me.KoliDataGridViewTextBoxColumn, Me.BoxDataGridViewTextBoxColumn, Me.PlIdDataGridViewTextBoxColumn, Me.PetugasDataGridViewTextBoxColumn, Me.ISBNDataGridViewTextBoxColumn, Me.KodeBukuDataGridViewTextBoxColumn, Me.JudulDataGridViewTextBoxColumn, Me.QtyDataGridViewTextBoxColumn, Me.TanggalDataGridViewTextBoxColumn})
-		Me.DGVPL.DataSource = Me.PackingListBindingSource
+		Me.DGVPL.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn5, Me.DataGridViewTextBoxColumn6, Me.DataGridViewTextBoxColumn7, Me.DataGridViewTextBoxColumn8, Me.DataGridViewTextBoxColumn9, Me.DataGridViewTextBoxColumn10})
+		Me.DGVPL.DataSource = Me.PackingListBindingSource1
 		Me.DGVPL.GridColor = System.Drawing.Color.DeepSkyBlue
 		Me.DGVPL.Location = New System.Drawing.Point(389, 139)
 		Me.DGVPL.Name = "DGVPL"
 		Me.DGVPL.RowHeadersVisible = False
 		Me.DGVPL.Size = New System.Drawing.Size(695, 260)
 		Me.DGVPL.TabIndex = 9
+		'
+		'DataGridViewTextBoxColumn1
+		'
+		Me.DataGridViewTextBoxColumn1.DataPropertyName = "Palet"
+		Me.DataGridViewTextBoxColumn1.HeaderText = "Palet"
+		Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
+		Me.DataGridViewTextBoxColumn1.Width = 35
+		'
+		'DataGridViewTextBoxColumn2
+		'
+		Me.DataGridViewTextBoxColumn2.DataPropertyName = "Koli"
+		Me.DataGridViewTextBoxColumn2.HeaderText = "Koli"
+		Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
+		Me.DataGridViewTextBoxColumn2.Width = 35
+		'
+		'DataGridViewTextBoxColumn3
+		'
+		Me.DataGridViewTextBoxColumn3.DataPropertyName = "Box"
+		Me.DataGridViewTextBoxColumn3.HeaderText = "Box"
+		Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
+		Me.DataGridViewTextBoxColumn3.Width = 35
+		'
+		'DataGridViewTextBoxColumn4
+		'
+		Me.DataGridViewTextBoxColumn4.DataPropertyName = "Pl_Id"
+		Me.DataGridViewTextBoxColumn4.HeaderText = "Pl_Id"
+		Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
+		Me.DataGridViewTextBoxColumn4.ReadOnly = True
+		Me.DataGridViewTextBoxColumn4.Width = 75
+		'
+		'DataGridViewTextBoxColumn5
+		'
+		Me.DataGridViewTextBoxColumn5.DataPropertyName = "Petugas"
+		Me.DataGridViewTextBoxColumn5.HeaderText = "Petugas"
+		Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
+		Me.DataGridViewTextBoxColumn5.Width = 65
+		'
+		'DataGridViewTextBoxColumn6
+		'
+		Me.DataGridViewTextBoxColumn6.DataPropertyName = "ISBN"
+		Me.DataGridViewTextBoxColumn6.HeaderText = "ISBN"
+		Me.DataGridViewTextBoxColumn6.Name = "DataGridViewTextBoxColumn6"
+		Me.DataGridViewTextBoxColumn6.Width = 113
+		'
+		'DataGridViewTextBoxColumn7
+		'
+		Me.DataGridViewTextBoxColumn7.DataPropertyName = "KodeBuku"
+		Me.DataGridViewTextBoxColumn7.HeaderText = "KodeBuku"
+		Me.DataGridViewTextBoxColumn7.Name = "DataGridViewTextBoxColumn7"
+		Me.DataGridViewTextBoxColumn7.Width = 65
+		'
+		'DataGridViewTextBoxColumn8
+		'
+		Me.DataGridViewTextBoxColumn8.DataPropertyName = "Judul"
+		Me.DataGridViewTextBoxColumn8.HeaderText = "Judul"
+		Me.DataGridViewTextBoxColumn8.Name = "DataGridViewTextBoxColumn8"
+		Me.DataGridViewTextBoxColumn8.Width = 185
+		'
+		'DataGridViewTextBoxColumn9
+		'
+		Me.DataGridViewTextBoxColumn9.DataPropertyName = "Qty"
+		Me.DataGridViewTextBoxColumn9.HeaderText = "Qty"
+		Me.DataGridViewTextBoxColumn9.Name = "DataGridViewTextBoxColumn9"
+		Me.DataGridViewTextBoxColumn9.Width = 35
+		'
+		'DataGridViewTextBoxColumn10
+		'
+		Me.DataGridViewTextBoxColumn10.DataPropertyName = "Tanggal"
+		Me.DataGridViewTextBoxColumn10.HeaderText = "Tanggal"
+		Me.DataGridViewTextBoxColumn10.Name = "DataGridViewTextBoxColumn10"
+		Me.DataGridViewTextBoxColumn10.Width = 50
+		'
+		'PackingListBindingSource1
+		'
+		Me.PackingListBindingSource1.DataMember = "Packing_List"
+		Me.PackingListBindingSource1.DataSource = Me.INVDataSet1
+		'
+		'INVDataSet1
+		'
+		Me.INVDataSet1.DataSetName = "INVDataSet1"
+		Me.INVDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+		'
+		'PackingListBindingSource
+		'
+		Me.PackingListBindingSource.DataMember = "Packing_List"
 		'
 		'ButtonCetak
 		'
@@ -495,90 +588,19 @@ Partial Class FormPackingList
 		Me.LabelItem.TabIndex = 13
 		Me.LabelItem.Text = "."
 		'
-		'INVDataSet2
+		'INVDataSet
 		'
-
-
+		Me.INVDataSet.DataSetName = "INVDataSet"
+		Me.INVDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
 		'
-		'PackingListBindingSource
+		'INVDataSetBindingSource
 		'
-		Me.PackingListBindingSource.DataMember = "Packing_List"
-
+		Me.INVDataSetBindingSource.DataSource = Me.INVDataSet
+		Me.INVDataSetBindingSource.Position = 0
 		'
 		'Packing_ListTableAdapter
 		'
-
-		'
-		'PaletDataGridViewTextBoxColumn
-		'
-		Me.PaletDataGridViewTextBoxColumn.DataPropertyName = "Palet"
-		Me.PaletDataGridViewTextBoxColumn.HeaderText = "Palet"
-		Me.PaletDataGridViewTextBoxColumn.Name = "PaletDataGridViewTextBoxColumn"
-		Me.PaletDataGridViewTextBoxColumn.Width = 35
-		'
-		'KoliDataGridViewTextBoxColumn
-		'
-		Me.KoliDataGridViewTextBoxColumn.DataPropertyName = "Koli"
-		Me.KoliDataGridViewTextBoxColumn.HeaderText = "Koli"
-		Me.KoliDataGridViewTextBoxColumn.Name = "KoliDataGridViewTextBoxColumn"
-		Me.KoliDataGridViewTextBoxColumn.Width = 35
-		'
-		'BoxDataGridViewTextBoxColumn
-		'
-		Me.BoxDataGridViewTextBoxColumn.DataPropertyName = "Box"
-		Me.BoxDataGridViewTextBoxColumn.HeaderText = "Box"
-		Me.BoxDataGridViewTextBoxColumn.Name = "BoxDataGridViewTextBoxColumn"
-		Me.BoxDataGridViewTextBoxColumn.Width = 35
-		'
-		'PlIdDataGridViewTextBoxColumn
-		'
-		Me.PlIdDataGridViewTextBoxColumn.DataPropertyName = "Pl_Id"
-		Me.PlIdDataGridViewTextBoxColumn.HeaderText = "Pl_Id"
-		Me.PlIdDataGridViewTextBoxColumn.Name = "PlIdDataGridViewTextBoxColumn"
-		Me.PlIdDataGridViewTextBoxColumn.ReadOnly = True
-		Me.PlIdDataGridViewTextBoxColumn.Width = 85
-		'
-		'PetugasDataGridViewTextBoxColumn
-		'
-		Me.PetugasDataGridViewTextBoxColumn.DataPropertyName = "Petugas"
-		Me.PetugasDataGridViewTextBoxColumn.HeaderText = "Petugas"
-		Me.PetugasDataGridViewTextBoxColumn.Name = "PetugasDataGridViewTextBoxColumn"
-		Me.PetugasDataGridViewTextBoxColumn.Width = 65
-		'
-		'ISBNDataGridViewTextBoxColumn
-		'
-		Me.ISBNDataGridViewTextBoxColumn.DataPropertyName = "ISBN"
-		Me.ISBNDataGridViewTextBoxColumn.HeaderText = "ISBN"
-		Me.ISBNDataGridViewTextBoxColumn.Name = "ISBNDataGridViewTextBoxColumn"
-		Me.ISBNDataGridViewTextBoxColumn.Width = 85
-		'
-		'KodeBukuDataGridViewTextBoxColumn
-		'
-		Me.KodeBukuDataGridViewTextBoxColumn.DataPropertyName = "KodeBuku"
-		Me.KodeBukuDataGridViewTextBoxColumn.HeaderText = "KodeBuku"
-		Me.KodeBukuDataGridViewTextBoxColumn.Name = "KodeBukuDataGridViewTextBoxColumn"
-		Me.KodeBukuDataGridViewTextBoxColumn.Width = 65
-		'
-		'JudulDataGridViewTextBoxColumn
-		'
-		Me.JudulDataGridViewTextBoxColumn.DataPropertyName = "Judul"
-		Me.JudulDataGridViewTextBoxColumn.HeaderText = "Judul"
-		Me.JudulDataGridViewTextBoxColumn.Name = "JudulDataGridViewTextBoxColumn"
-		Me.JudulDataGridViewTextBoxColumn.Width = 200
-		'
-		'QtyDataGridViewTextBoxColumn
-		'
-		Me.QtyDataGridViewTextBoxColumn.DataPropertyName = "Qty"
-		Me.QtyDataGridViewTextBoxColumn.HeaderText = "Qty"
-		Me.QtyDataGridViewTextBoxColumn.Name = "QtyDataGridViewTextBoxColumn"
-		Me.QtyDataGridViewTextBoxColumn.Width = 35
-		'
-		'TanggalDataGridViewTextBoxColumn
-		'
-		Me.TanggalDataGridViewTextBoxColumn.DataPropertyName = "Tanggal"
-		Me.TanggalDataGridViewTextBoxColumn.HeaderText = "Tanggal"
-		Me.TanggalDataGridViewTextBoxColumn.Name = "TanggalDataGridViewTextBoxColumn"
-		Me.TanggalDataGridViewTextBoxColumn.Width = 54
+		Me.Packing_ListTableAdapter.ClearBeforeFill = True
 		'
 		'FormPackingList
 		'
@@ -607,8 +629,11 @@ Partial Class FormPackingList
 		Me.GroupBoxCRUD.ResumeLayout(False)
 		Me.GroupBoxCRUD.PerformLayout()
 		CType(Me.DGVPL, System.ComponentModel.ISupportInitialize).EndInit()
-
+		CType(Me.PackingListBindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.INVDataSet1, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.PackingListBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.INVDataSet, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.INVDataSetBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
 		Me.ResumeLayout(False)
 		Me.PerformLayout()
 
@@ -664,4 +689,19 @@ Partial Class FormPackingList
 	Friend WithEvents JudulDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
 	Friend WithEvents QtyDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
 	Friend WithEvents TanggalDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+	Friend WithEvents INVDataSetBindingSource As BindingSource
+	Friend WithEvents INVDataSet As INVDataSet
+	Friend WithEvents INVDataSet1 As INVDataSet1
+	Friend WithEvents PackingListBindingSource1 As BindingSource
+	Friend WithEvents Packing_ListTableAdapter As INVDataSet1TableAdapters.Packing_ListTableAdapter
+	Friend WithEvents DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
+	Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
+	Friend WithEvents DataGridViewTextBoxColumn3 As DataGridViewTextBoxColumn
+	Friend WithEvents DataGridViewTextBoxColumn4 As DataGridViewTextBoxColumn
+	Friend WithEvents DataGridViewTextBoxColumn5 As DataGridViewTextBoxColumn
+	Friend WithEvents DataGridViewTextBoxColumn6 As DataGridViewTextBoxColumn
+	Friend WithEvents DataGridViewTextBoxColumn7 As DataGridViewTextBoxColumn
+	Friend WithEvents DataGridViewTextBoxColumn8 As DataGridViewTextBoxColumn
+	Friend WithEvents DataGridViewTextBoxColumn9 As DataGridViewTextBoxColumn
+	Friend WithEvents DataGridViewTextBoxColumn10 As DataGridViewTextBoxColumn
 End Class
