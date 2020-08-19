@@ -27,16 +27,22 @@ Public Class FormPackingList
         DGVPL.ReadOnly = True
     End Sub
     Private Sub FormPackingList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'TODO: This line of code loads data into the 'INVDataSet1.Packing_List' table. You can move, or remove it, as needed.
-        Me.Packing_ListTableAdapter.Fill(Me.INVDataSet1.Packing_List)
-        'TODO: This line of code loads data into the 'INVDataSet2.Packing_List' table. You can move, or remove it, as needed.
 
+        Me.Packing_ListTableAdapter.Fill(Me.INVDataSet1.Packing_List)
 
         Call KonekDbBRDJKT()
         Call KonekDbINV()
         Call QtyPl()
         Call CountRow()
         Call RefreshDGVPL()
+
+        'ReadOnly DGVPL
+        DGVPL.ReadOnly = True
+        DGVPL.Enabled = False
+
+        'Sembunyikan TextBox PL_ID
+        TextBoxPL_ID.Visible = False
+
         'TextBoxMasukanISBN.Focus()
         TextBoxJudul.ReadOnly = True
         TextBoxKodeBuku.ReadOnly = True
@@ -56,6 +62,9 @@ Public Class FormPackingList
         ComboBoxCari.Items.Add("Qty")
         ComboBoxCari.Items.Add("Tanggal")
 
+        'Disable Button
+        ButtonEdit.Enabled = False
+        ButtonDelete.Enabled = False
     End Sub
 
     Sub QtyPl()
@@ -115,6 +124,25 @@ Public Class FormPackingList
         'FormDGV.Show()
         'Me.Visible = False
 
+        'Enabling Button
+        ButtonEdit.Enabled = True
+        ButtonDelete.Enabled = True
+
+        'Enabling DGV
+        DGVPL.Enabled = True
+
+
+        TextBoxMasukanISBN.ReadOnly = True
+        TextBoxJudul.ReadOnly = True
+        TextBoxKodeBuku.ReadOnly = True
+        TextBoxPL_ID.Visible = True
+        TextBoxPL_ID.ReadOnly = True
+        TextBoxPalet.ReadOnly = True
+        TextBoxKoli.ReadOnly = True
+        TextBoxBox.ReadOnly = True
+        TextBoxPetugas.ReadOnly = True
+        TextBoxMasukanQTY.ReadOnly = True
+
         If ComboBoxCari.Text = "" Or TextBoxCari.Text = "" Then
             If MsgBox("Pilih dahulu Kriteria pencarian, Pilih kriteria?", MsgBoxStyle.YesNo, "Konfirmasi") = MsgBoxResult.Yes Then
                 If ComboBoxCari.Text = "" Then
@@ -133,6 +161,7 @@ Public Class FormPackingList
                 Call KonekDbINV()
                 Cmd = New SqlCommand("SELECT * FROM Packing_List WHERE " & ComboBoxCari.SelectedItem.ToString & " Like '%" & TextBoxCari.Text & "%' ", Conn)
                 Dr = Cmd.ExecuteReader
+                Dr.Read()
                 If Dr.HasRows Then
                     Call KonekDbINV()
                     Da = New SqlDataAdapter("SELECT * FROM Packing_List WHERE " & ComboBoxCari.SelectedItem.ToString & " Like '%" & TextBoxCari.Text & "%' ", Conn)
@@ -141,6 +170,16 @@ Public Class FormPackingList
                     DGVPL.DataSource = Ds.Tables(0)
                     DGVPL.ReadOnly = True
 
+                    'Memasukan ke TextBox
+                    TextBoxPalet.Text = Dr.Item("Palet")
+                    TextBoxKoli.Text = Dr.Item("Koli")
+                    TextBoxBox.Text = Dr.Item("Box")
+                    TextBoxMasukanQTY.Text = Dr.Item("Qty")
+                    TextBoxPL_ID.Text = Dr.Item("Pl_Id")
+                    TextBoxMasukanISBN.Text = Dr.Item("ISBN")
+                    TextBoxKodeBuku.Text = Dr.Item("KodeBuku")
+                    TextBoxJudul.Text = Dr.Item("Judul")
+                    TextBoxPetugas.Text = Dr.Item("Petugas")
 
                 Else
                     If MsgBox("Data Tidak Ada, Ulangi Pencarian?", MsgBoxStyle.YesNo, "Konfirmasi") = MsgBoxResult.Yes Then
@@ -156,6 +195,7 @@ Public Class FormPackingList
                 Call KonekDbINV()
                 Cmd = New SqlCommand("SELECT * FROM Packing_List WHERE " & ComboBoxCari.SelectedItem.ToString & " = '" & TextBoxCari.Text & "' ", Conn)
                 Dr = Cmd.ExecuteReader
+                Dr.Read()
                 If Dr.HasRows Then
                     Call KonekDbINV()
                     Da = New SqlDataAdapter("SELECT * FROM Packing_List WHERE " & ComboBoxCari.SelectedItem.ToString & " = '" & TextBoxCari.Text & "' ", Conn)
@@ -163,11 +203,24 @@ Public Class FormPackingList
                     Da.Fill(Ds)
                     DGVPL.DataSource = Ds.Tables(0)
                     DGVPL.ReadOnly = True
+
+                    'Memasukan ke TextBox
+                    TextBoxPalet.Text = Dr.Item("Palet")
+                    TextBoxKoli.Text = Dr.Item("Koli")
+                    TextBoxBox.Text = Dr.Item("Box")
+                    TextBoxMasukanQTY.Text = Dr.Item("Qty")
+                    TextBoxPL_ID.Text = Dr.Item("Pl_Id")
+                    TextBoxMasukanISBN.Text = Dr.Item("ISBN")
+                    TextBoxKodeBuku.Text = Dr.Item("KodeBuku")
+                    TextBoxJudul.Text = Dr.Item("Judul")
+                    TextBoxPetugas.Text = Dr.Item("Petugas")
+
                 Else
                     If MsgBox("Data Tidak Ada, Ulangi Pencarian?", MsgBoxStyle.YesNo, "Konfirmasi") = MsgBoxResult.Yes Then
                         ComboBoxCari.Text = ""
                         TextBoxCari.Text = ""
                         ComboBoxCari.Focus()
+                        Call RefreshDGVPL()
                     Else
                         DGVPL.DataSource = Nothing
                     End If
@@ -186,24 +239,42 @@ Public Class FormPackingList
 
 
     Private Sub ButtonSave_Click_1(sender As Object, e As EventArgs) Handles ButtonSave.Click
-        If TextBoxPetugas.Text = "" Then
-            If MsgBox("Kolom nama petugas tidak boleh kosong, lengkapi?", MsgBoxStyle.YesNo, "Konfimasi") = MsgBoxResult.Yes Then
-                TextBoxPetugas.Focus()
+        If ButtonSave.Text = "Simpan" Then
+            If TextBoxPetugas.Text = "" Then
+                If MsgBox("Kolom nama petugas tidak boleh kosong, lengkapi?", MsgBoxStyle.YesNo, "Konfimasi") = MsgBoxResult.Yes Then
+                    TextBoxPetugas.Focus()
+                Else
+                    Call BersihkanInput()
+                End If
             Else
-                Call BersihkanInput()
+                Call KonekDbINV()
+                Dim Simpan As String = "INSERT INTO Packing_List (Palet, Koli, Box, Petugas, ISBN, KodeBuku, Judul, Qty, Tanggal)VALUES ('" & TextBoxPalet.Text & "','" & TextBoxKoli.Text & "','" & TextBoxBox.Text & "','" & TextBoxPetugas.Text & "','" & TextBoxMasukanISBN.Text & "','" & TextBoxKodeBuku.Text & "','" & Replace(TextBoxJudul.Text, "'", "") & "','" & TextBoxMasukanQTY.Text & "','" & DateTimePicker.Value & "')"
+                Cmd = New SqlCommand(Simpan, Conn)
+                Cmd.ExecuteNonQuery()
+                Call RefreshDGVPL()
+                Call QtyPl()
+                Call CountRow()
+                TextBoxMasukanISBN.Text = ""
+                TextBoxMasukanQTY.Text = ""
+                TextBoxMasukanISBN.Focus()
             End If
         Else
-            Call KonekDbINV()
-            Dim Simpan As String = "INSERT INTO Packing_List (Palet, Koli, Box, Petugas, ISBN, KodeBuku, Judul, Qty, Tanggal)VALUES ('" & TextBoxPalet.Text & "','" & TextBoxKoli.Text & "','" & TextBoxBox.Text & "','" & TextBoxPetugas.Text & "','" & TextBoxMasukanISBN.Text & "','" & TextBoxKodeBuku.Text & "','" & Replace(TextBoxJudul.Text, "'", "") & "','" & TextBoxMasukanQTY.Text & "','" & DateTimePicker.Value & "')"
-            Cmd = New SqlCommand(Simpan, Conn)
-            Cmd.ExecuteNonQuery()
-            Call RefreshDGVPL()
-            Call QtyPl()
-            Call CountRow()
-            TextBoxMasukanISBN.Text = ""
-            TextBoxMasukanQTY.Text = ""
-            TextBoxMasukanISBN.Focus()
+            If TextBoxPetugas.Text = "" Then
+                MsgBox("Nama Petugas Tidak Boleh Kosong")
+                TextBoxPetugas.Focus()
+            Else
+                Call KonekDbINV()
+                Dim Update As String = "UPDATE Packing_List SET Palet = '" & TextBoxPalet.Text & "', Koli = '" & TextBoxKoli.Text & "', Box = '" & TextBoxBox.Text & "',
+                Petugas = '" & TextBoxPetugas.Text & "' , Qty = '" & TextBoxMasukanQTY.Text & "', Tanggal = '" & DateTimePicker.Value & "' WHERE Pl_Id = '" & TextBoxPL_ID.Text & "'  AND ISBN = '" & TextBoxMasukanISBN.Text & "' "
+                Cmd = New SqlCommand(Update, Conn)
+                Cmd.ExecuteNonQuery()
+                MsgBox("Data Sudah Di Update")
+                Call BersihkanInput()
+
+            End If
+
         End If
+
 
 
 
@@ -211,10 +282,32 @@ Public Class FormPackingList
     End Sub
 
     Private Sub ButtonEdit_Click(sender As Object, e As EventArgs) Handles ButtonEdit.Click
+        If TextBoxCari.Text = "" Then
+            MsgBox("Cari dahulu data yg akan di cari")
+        Else
+            ButtonSave.Text = "Update"
+            TextBoxPalet.ReadOnly = False
+            TextBoxKoli.ReadOnly = False
+            TextBoxBox.ReadOnly = False
+            TextBoxPetugas.ReadOnly = False
+            TextBoxMasukanQTY.ReadOnly = False
+
+        End If
+
 
     End Sub
 
     Private Sub ButtonDelete_Click(sender As Object, e As EventArgs) Handles ButtonDelete.Click
+        If TextBoxCari.Text = "" Then
+            MsgBox("Cari dahulu data yang akan di hapus")
+        Else
+            Call KonekDbINV()
+            Dim Hapus As String = "DELETE FROM Packing_List WHERE Pl_Id = '" & TextBoxPL_ID.Text & "' AND ISBN = '" & TextBoxMasukanISBN.Text & "' "
+            Cmd = New SqlCommand(Hapus, Conn)
+            Cmd.ExecuteNonQuery()
+
+
+        End If
 
     End Sub
 
@@ -233,9 +326,31 @@ Public Class FormPackingList
 
     End Sub
 
-    Private Sub TextBoxMasukanQTY_TextChanged(sender As Object, e As EventArgs) Handles TextBoxMasukanQTY.TextChanged
 
+    Private Sub DGVPL_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGVPL.CellContentClick
+        Dim Baris As Integer
+        With DGVPL
+            If e.RowIndex >= 0 Then
+                Baris = .CurrentRow.Index
+                TextBoxPalet.Text = .Rows(Baris).Cells(0).Value.ToString
+                TextBoxKoli.Text = .Rows(Baris).Cells(1).Value.ToString
+                TextBoxBox.Text = .Rows(Baris).Cells(2).Value.ToString
+                TextBoxMasukanQTY.Text = .Rows(Baris).Cells(8).Value.ToString
+                TextBoxMasukanISBN.Text = .Rows(Baris).Cells(5).Value.ToString
+                TextBoxJudul.Text = .Rows(Baris).Cells(7).Value.ToString
+                TextBoxKodeBuku.Text = .Rows(Baris).Cells(6).Value.ToString
+                TextBoxPetugas.Text = .Rows(Baris).Cells(4).Value.ToString
+                TextBoxPL_ID.Text = .Rows(Baris).Cells(3).Value.ToString
+
+                DateTimePicker.Format = DateTimePickerFormat.Custom
+                DateTimePicker.CustomFormat = "yyyy/MM/dd"
+                DateTimePicker.Value = .Rows(Baris).Cells(9).Value.ToString
+
+            End If
+
+        End With
     End Sub
+
 
     'Private Sub PrintDocument1_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles PrintDocument1.PrintPage
     '    Dim dataGridViewImage As New Bitmap(Me.DGV.Width, Me.DGV.Height)

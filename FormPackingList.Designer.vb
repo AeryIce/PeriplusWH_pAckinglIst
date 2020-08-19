@@ -76,6 +76,7 @@ Partial Class FormPackingList
 		Me.INVDataSet = New PeriplusWH_pAckinglIst.INVDataSet()
 		Me.INVDataSetBindingSource = New System.Windows.Forms.BindingSource(Me.components)
 		Me.Packing_ListTableAdapter = New PeriplusWH_pAckinglIst.INVDataSet1TableAdapters.Packing_ListTableAdapter()
+		Me.TextBoxPL_ID = New System.Windows.Forms.TextBox()
 		Me.GroupBoxInput.SuspendLayout()
 		Me.GroupBoxCRUD.SuspendLayout()
 		CType(Me.DGVPL, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -602,12 +603,20 @@ Partial Class FormPackingList
 		'
 		Me.Packing_ListTableAdapter.ClearBeforeFill = True
 		'
+		'TextBoxPL_ID
+		'
+		Me.TextBoxPL_ID.Location = New System.Drawing.Point(638, 422)
+		Me.TextBoxPL_ID.Name = "TextBoxPL_ID"
+		Me.TextBoxPL_ID.Size = New System.Drawing.Size(100, 20)
+		Me.TextBoxPL_ID.TabIndex = 14
+		'
 		'FormPackingList
 		'
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
 		Me.BackColor = System.Drawing.Color.LightPink
 		Me.ClientSize = New System.Drawing.Size(1095, 473)
+		Me.Controls.Add(Me.TextBoxPL_ID)
 		Me.Controls.Add(Me.LabelItem)
 		Me.Controls.Add(Me.LabelJmlItem)
 		Me.Controls.Add(Me.LabelQty)
@@ -704,4 +713,5 @@ Partial Class FormPackingList
 	Friend WithEvents DataGridViewTextBoxColumn8 As DataGridViewTextBoxColumn
 	Friend WithEvents DataGridViewTextBoxColumn9 As DataGridViewTextBoxColumn
 	Friend WithEvents DataGridViewTextBoxColumn10 As DataGridViewTextBoxColumn
+	Friend WithEvents TextBoxPL_ID As TextBox
 End Class
