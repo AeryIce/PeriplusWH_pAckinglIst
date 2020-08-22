@@ -239,7 +239,7 @@ Public Class FormPackingList
 
 
     Private Sub ButtonSave_Click_1(sender As Object, e As EventArgs) Handles ButtonSave.Click
-        If ButtonSave.Text = "Simpan" Then
+        If ButtonSave.Text = "Save" Then
             If TextBoxPetugas.Text = "" Then
                 If MsgBox("Kolom nama petugas tidak boleh kosong, lengkapi?", MsgBoxStyle.YesNo, "Konfimasi") = MsgBoxResult.Yes Then
                     TextBoxPetugas.Focus()
@@ -316,6 +316,14 @@ Public Class FormPackingList
         TextBoxKoli.Text = ""
         TextBoxBox.Text = ""
         TextBoxPetugas.Text = ""
+        TextBoxPalet.Enabled = True
+        TextBoxPalet.ReadOnly = False
+        TextBoxKoli.Enabled = True
+        TextBoxKoli.ReadOnly = False
+        TextBoxBox.Enabled = True
+        TextBoxBox.ReadOnly = False
+        TextBoxPetugas.Enabled = True
+        TextBoxPetugas.ReadOnly = False
     End Sub
 
     Private Sub TextBoxCari_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TextBoxCari.KeyPress
