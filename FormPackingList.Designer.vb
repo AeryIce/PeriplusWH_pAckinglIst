@@ -64,27 +64,22 @@ Partial Class FormPackingList
 		Me.DataGridViewTextBoxColumn8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
 		Me.DataGridViewTextBoxColumn9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
 		Me.DataGridViewTextBoxColumn10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-		Me.PackingListBindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
-		Me.INVDataSet1 = New PeriplusWH_pAckinglIst.INVDataSet1()
 		Me.PackingListBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-		Me.ButtonCetak = New System.Windows.Forms.Button()
-		Me.ButtonExit = New System.Windows.Forms.Button()
+		Me.INVDataSet = New PeriplusWH_pAckinglIst.INVDataSet()
 		Me.LabelJmlQty = New System.Windows.Forms.Label()
 		Me.LabelQty = New System.Windows.Forms.Label()
 		Me.LabelJmlItem = New System.Windows.Forms.Label()
 		Me.LabelItem = New System.Windows.Forms.Label()
-		Me.INVDataSet = New PeriplusWH_pAckinglIst.INVDataSet()
-		Me.INVDataSetBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-		Me.Packing_ListTableAdapter = New PeriplusWH_pAckinglIst.INVDataSet1TableAdapters.Packing_ListTableAdapter()
 		Me.TextBoxPL_ID = New System.Windows.Forms.TextBox()
+		Me.ButtonCetakPL = New System.Windows.Forms.Button()
+		Me.ButtonCetak = New System.Windows.Forms.Button()
+		Me.ButtonExit = New System.Windows.Forms.Button()
+		Me.Packing_ListTableAdapter = New PeriplusWH_pAckinglIst.INVDataSetTableAdapters.Packing_ListTableAdapter()
 		Me.GroupBoxInput.SuspendLayout()
 		Me.GroupBoxCRUD.SuspendLayout()
 		CType(Me.DGVPL, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.PackingListBindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.INVDataSet1, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.PackingListBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.INVDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.INVDataSetBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.SuspendLayout()
 		'
 		'LabelStatusKoneksiBRDJKT
@@ -432,7 +427,7 @@ Partial Class FormPackingList
 		Me.DGVPL.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
 		Me.DGVPL.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
 		Me.DGVPL.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn5, Me.DataGridViewTextBoxColumn6, Me.DataGridViewTextBoxColumn7, Me.DataGridViewTextBoxColumn8, Me.DataGridViewTextBoxColumn9, Me.DataGridViewTextBoxColumn10})
-		Me.DGVPL.DataSource = Me.PackingListBindingSource1
+		Me.DGVPL.DataSource = Me.PackingListBindingSource
 		Me.DGVPL.GridColor = System.Drawing.Color.DeepSkyBlue
 		Me.DGVPL.Location = New System.Drawing.Point(389, 139)
 		Me.DGVPL.Name = "DGVPL"
@@ -445,21 +440,18 @@ Partial Class FormPackingList
 		Me.DataGridViewTextBoxColumn1.DataPropertyName = "Palet"
 		Me.DataGridViewTextBoxColumn1.HeaderText = "Palet"
 		Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
-		Me.DataGridViewTextBoxColumn1.Width = 35
 		'
 		'DataGridViewTextBoxColumn2
 		'
 		Me.DataGridViewTextBoxColumn2.DataPropertyName = "Koli"
 		Me.DataGridViewTextBoxColumn2.HeaderText = "Koli"
 		Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
-		Me.DataGridViewTextBoxColumn2.Width = 35
 		'
 		'DataGridViewTextBoxColumn3
 		'
 		Me.DataGridViewTextBoxColumn3.DataPropertyName = "Box"
 		Me.DataGridViewTextBoxColumn3.HeaderText = "Box"
 		Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
-		Me.DataGridViewTextBoxColumn3.Width = 35
 		'
 		'DataGridViewTextBoxColumn4
 		'
@@ -467,91 +459,52 @@ Partial Class FormPackingList
 		Me.DataGridViewTextBoxColumn4.HeaderText = "Pl_Id"
 		Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
 		Me.DataGridViewTextBoxColumn4.ReadOnly = True
-		Me.DataGridViewTextBoxColumn4.Width = 75
 		'
 		'DataGridViewTextBoxColumn5
 		'
 		Me.DataGridViewTextBoxColumn5.DataPropertyName = "Petugas"
 		Me.DataGridViewTextBoxColumn5.HeaderText = "Petugas"
 		Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
-		Me.DataGridViewTextBoxColumn5.Width = 65
 		'
 		'DataGridViewTextBoxColumn6
 		'
 		Me.DataGridViewTextBoxColumn6.DataPropertyName = "ISBN"
 		Me.DataGridViewTextBoxColumn6.HeaderText = "ISBN"
 		Me.DataGridViewTextBoxColumn6.Name = "DataGridViewTextBoxColumn6"
-		Me.DataGridViewTextBoxColumn6.Width = 113
 		'
 		'DataGridViewTextBoxColumn7
 		'
 		Me.DataGridViewTextBoxColumn7.DataPropertyName = "KodeBuku"
 		Me.DataGridViewTextBoxColumn7.HeaderText = "KodeBuku"
 		Me.DataGridViewTextBoxColumn7.Name = "DataGridViewTextBoxColumn7"
-		Me.DataGridViewTextBoxColumn7.Width = 65
 		'
 		'DataGridViewTextBoxColumn8
 		'
 		Me.DataGridViewTextBoxColumn8.DataPropertyName = "Judul"
 		Me.DataGridViewTextBoxColumn8.HeaderText = "Judul"
 		Me.DataGridViewTextBoxColumn8.Name = "DataGridViewTextBoxColumn8"
-		Me.DataGridViewTextBoxColumn8.Width = 185
 		'
 		'DataGridViewTextBoxColumn9
 		'
 		Me.DataGridViewTextBoxColumn9.DataPropertyName = "Qty"
 		Me.DataGridViewTextBoxColumn9.HeaderText = "Qty"
 		Me.DataGridViewTextBoxColumn9.Name = "DataGridViewTextBoxColumn9"
-		Me.DataGridViewTextBoxColumn9.Width = 35
 		'
 		'DataGridViewTextBoxColumn10
 		'
 		Me.DataGridViewTextBoxColumn10.DataPropertyName = "Tanggal"
 		Me.DataGridViewTextBoxColumn10.HeaderText = "Tanggal"
 		Me.DataGridViewTextBoxColumn10.Name = "DataGridViewTextBoxColumn10"
-		Me.DataGridViewTextBoxColumn10.Width = 50
-		'
-		'PackingListBindingSource1
-		'
-		Me.PackingListBindingSource1.DataMember = "Packing_List"
-		Me.PackingListBindingSource1.DataSource = Me.INVDataSet1
-		'
-		'INVDataSet1
-		'
-		Me.INVDataSet1.DataSetName = "INVDataSet1"
-		Me.INVDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
 		'
 		'PackingListBindingSource
 		'
 		Me.PackingListBindingSource.DataMember = "Packing_List"
+		Me.PackingListBindingSource.DataSource = Me.INVDataSet
 		'
-		'ButtonCetak
+		'INVDataSet
 		'
-		Me.ButtonCetak.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-		Me.ButtonCetak.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.ButtonCetak.Image = Global.PeriplusWH_pAckinglIst.My.Resources.Resources.print_32px
-		Me.ButtonCetak.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-		Me.ButtonCetak.Location = New System.Drawing.Point(813, 408)
-		Me.ButtonCetak.Name = "ButtonCetak"
-		Me.ButtonCetak.Size = New System.Drawing.Size(125, 38)
-		Me.ButtonCetak.TabIndex = 7
-		Me.ButtonCetak.Text = "Cetak"
-		Me.ButtonCetak.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-		Me.ButtonCetak.UseVisualStyleBackColor = True
-		'
-		'ButtonExit
-		'
-		Me.ButtonExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-		Me.ButtonExit.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.ButtonExit.Image = Global.PeriplusWH_pAckinglIst.My.Resources.Resources.exit_32px
-		Me.ButtonExit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-		Me.ButtonExit.Location = New System.Drawing.Point(958, 408)
-		Me.ButtonExit.Name = "ButtonExit"
-		Me.ButtonExit.Size = New System.Drawing.Size(125, 38)
-		Me.ButtonExit.TabIndex = 4
-		Me.ButtonExit.Text = "Exit"
-		Me.ButtonExit.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-		Me.ButtonExit.UseVisualStyleBackColor = True
+		Me.INVDataSet.DataSetName = "INVDataSet"
+		Me.INVDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
 		'
 		'LabelJmlQty
 		'
@@ -589,26 +542,58 @@ Partial Class FormPackingList
 		Me.LabelItem.TabIndex = 13
 		Me.LabelItem.Text = "."
 		'
-		'INVDataSet
+		'TextBoxPL_ID
 		'
-		Me.INVDataSet.DataSetName = "INVDataSet"
-		Me.INVDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+		Me.TextBoxPL_ID.Location = New System.Drawing.Point(539, 424)
+		Me.TextBoxPL_ID.Name = "TextBoxPL_ID"
+		Me.TextBoxPL_ID.Size = New System.Drawing.Size(100, 20)
+		Me.TextBoxPL_ID.TabIndex = 14
 		'
-		'INVDataSetBindingSource
+		'ButtonCetakPL
 		'
-		Me.INVDataSetBindingSource.DataSource = Me.INVDataSet
-		Me.INVDataSetBindingSource.Position = 0
+		Me.ButtonCetakPL.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+		Me.ButtonCetakPL.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.ButtonCetakPL.Image = Global.PeriplusWH_pAckinglIst.My.Resources.Resources.print_32px
+		Me.ButtonCetakPL.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+		Me.ButtonCetakPL.Location = New System.Drawing.Point(818, 406)
+		Me.ButtonCetakPL.Name = "ButtonCetakPL"
+		Me.ButtonCetakPL.Size = New System.Drawing.Size(125, 38)
+		Me.ButtonCetakPL.TabIndex = 15
+		Me.ButtonCetakPL.Text = "Cetak PL "
+		Me.ButtonCetakPL.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+		Me.ButtonCetakPL.UseVisualStyleBackColor = True
+		'
+		'ButtonCetak
+		'
+		Me.ButtonCetak.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+		Me.ButtonCetak.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.ButtonCetak.Image = Global.PeriplusWH_pAckinglIst.My.Resources.Resources.print_32px
+		Me.ButtonCetak.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+		Me.ButtonCetak.Location = New System.Drawing.Point(665, 407)
+		Me.ButtonCetak.Name = "ButtonCetak"
+		Me.ButtonCetak.Size = New System.Drawing.Size(125, 38)
+		Me.ButtonCetak.TabIndex = 7
+		Me.ButtonCetak.Text = "Cetak"
+		Me.ButtonCetak.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+		Me.ButtonCetak.UseVisualStyleBackColor = True
+		'
+		'ButtonExit
+		'
+		Me.ButtonExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+		Me.ButtonExit.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.ButtonExit.Image = Global.PeriplusWH_pAckinglIst.My.Resources.Resources.exit_32px
+		Me.ButtonExit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+		Me.ButtonExit.Location = New System.Drawing.Point(958, 408)
+		Me.ButtonExit.Name = "ButtonExit"
+		Me.ButtonExit.Size = New System.Drawing.Size(125, 38)
+		Me.ButtonExit.TabIndex = 4
+		Me.ButtonExit.Text = "Exit"
+		Me.ButtonExit.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+		Me.ButtonExit.UseVisualStyleBackColor = True
 		'
 		'Packing_ListTableAdapter
 		'
 		Me.Packing_ListTableAdapter.ClearBeforeFill = True
-		'
-		'TextBoxPL_ID
-		'
-		Me.TextBoxPL_ID.Location = New System.Drawing.Point(638, 422)
-		Me.TextBoxPL_ID.Name = "TextBoxPL_ID"
-		Me.TextBoxPL_ID.Size = New System.Drawing.Size(100, 20)
-		Me.TextBoxPL_ID.TabIndex = 14
 		'
 		'FormPackingList
 		'
@@ -616,6 +601,7 @@ Partial Class FormPackingList
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
 		Me.BackColor = System.Drawing.Color.LightPink
 		Me.ClientSize = New System.Drawing.Size(1095, 473)
+		Me.Controls.Add(Me.ButtonCetakPL)
 		Me.Controls.Add(Me.TextBoxPL_ID)
 		Me.Controls.Add(Me.LabelItem)
 		Me.Controls.Add(Me.LabelJmlItem)
@@ -638,11 +624,8 @@ Partial Class FormPackingList
 		Me.GroupBoxCRUD.ResumeLayout(False)
 		Me.GroupBoxCRUD.PerformLayout()
 		CType(Me.DGVPL, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.PackingListBindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.INVDataSet1, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.PackingListBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.INVDataSet, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.INVDataSetBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
 		Me.ResumeLayout(False)
 		Me.PerformLayout()
 
@@ -686,8 +669,6 @@ Partial Class FormPackingList
 	Friend WithEvents LabelJmlItem As Label
 	Friend WithEvents LabelItem As Label
 
-	Friend WithEvents PackingListBindingSource As BindingSource
-
 	Friend WithEvents PaletDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
 	Friend WithEvents KoliDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
 	Friend WithEvents BoxDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
@@ -698,11 +679,11 @@ Partial Class FormPackingList
 	Friend WithEvents JudulDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
 	Friend WithEvents QtyDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
 	Friend WithEvents TanggalDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-	Friend WithEvents INVDataSetBindingSource As BindingSource
+	Friend WithEvents TextBoxPL_ID As TextBox
+	Friend WithEvents ButtonCetakPL As Button
 	Friend WithEvents INVDataSet As INVDataSet
-	Friend WithEvents INVDataSet1 As INVDataSet1
-	Friend WithEvents PackingListBindingSource1 As BindingSource
-	Friend WithEvents Packing_ListTableAdapter As INVDataSet1TableAdapters.Packing_ListTableAdapter
+	Friend WithEvents PackingListBindingSource As BindingSource
+	Friend WithEvents Packing_ListTableAdapter As INVDataSetTableAdapters.Packing_ListTableAdapter
 	Friend WithEvents DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
 	Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
 	Friend WithEvents DataGridViewTextBoxColumn3 As DataGridViewTextBoxColumn
@@ -713,5 +694,4 @@ Partial Class FormPackingList
 	Friend WithEvents DataGridViewTextBoxColumn8 As DataGridViewTextBoxColumn
 	Friend WithEvents DataGridViewTextBoxColumn9 As DataGridViewTextBoxColumn
 	Friend WithEvents DataGridViewTextBoxColumn10 As DataGridViewTextBoxColumn
-	Friend WithEvents TextBoxPL_ID As TextBox
 End Class

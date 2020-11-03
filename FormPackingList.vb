@@ -1,4 +1,8 @@
 ﻿Imports System.Data.SqlClient
+Imports System.Data
+Imports CrystalDecisions.CrystalReports.Engine
+Imports CrystalDecisions.Shared
+
 Public Class FormPackingList
 
     Dim JmlRows As Integer
@@ -27,12 +31,13 @@ Public Class FormPackingList
         DGVPL.ReadOnly = True
     End Sub
     Private Sub FormPackingList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'TODO: This line of code loads data into the 'INVDataSet.Packing_List' table. You can move, or remove it, as needed.
+        Me.Packing_ListTableAdapter.Fill(Me.INVDataSet.Packing_List)
 
-        Me.Packing_ListTableAdapter.Fill(Me.INVDataSet1.Packing_List)
 
         Call KonekDbBRDJKT()
         Call KonekDbINV()
-        Call QtyPl()
+        'Call QtyPl()
         Call CountRow()
         Call RefreshDGVPL()
 
@@ -48,7 +53,7 @@ Public Class FormPackingList
         TextBoxKodeBuku.ReadOnly = True
         DateTimePicker.Format = DateTimePickerFormat.Custom
         DateTimePicker.CustomFormat = "yyyy/MM/dd"
-        ButtonCetak.Enabled = False
+        ButtonCetak.Enabled = True
 
         'Add Text ComboBox
         ComboBoxCari.Items.Add("Palet")
@@ -67,15 +72,15 @@ Public Class FormPackingList
         ButtonDelete.Enabled = False
     End Sub
 
-    Sub QtyPl()
+    'Sub QtyPl()
 
-        Dim QtyBuku As Integer
-        For Baris As Integer = 0 To DGVPL.Rows.Count - 1
-            QtyBuku = QtyBuku + DGVPL.Rows(Baris).Cells(8).Value
-        Next
-        LabelQty.Text = QtyBuku
+    '    Dim QtyBuku As Integer
+    '    For Baris As Integer = 0 To DGVPL.Rows.Count - 1
+    '        QtyBuku = QtyBuku + DGVPL.Rows(Baris).Cells(8).Value
+    '    Next
+    '    LabelQty.Text = QtyBuku
 
-    End Sub
+    'End Sub
 
     Private Sub ButtonExit_Click(sender As Object, e As EventArgs) Handles ButtonExit.Click
         Me.Close()
@@ -93,8 +98,20 @@ Public Class FormPackingList
                 TextBoxJudul.Text = Dr.Item("DESC")
                 TextBoxKodeBuku.Text = Dr.Item("OPTFLD4")
             Else
-                MsgBox("Data Tidak Ada")
-                Call BersihkanInput()
+                Call KonekDbBRDJKT()
+                Cmd = New SqlCommand("SELECT * FROM ICITEM WHERE OPTFLD4 = '" & TextBoxMasukanISBN.Text & "' ", Conn)
+                Dr = Cmd.ExecuteReader()
+                Dr.Read()
+                If Dr.HasRows Then
+                    TextBoxJudul.Text = Dr.Item("DESC")
+                    TextBoxKodeBuku.Text = Dr.Item("OPTFLD4")
+                    TextBoxMasukanISBN.Text = Dr.Item("ITEMNO")
+                Else
+                    MsgBox("Data Tidak Ada")
+                    Call BersihkanInput()
+
+                End If
+
             End If
             TextBoxMasukanQTY.Focus()
 
@@ -181,6 +198,15 @@ Public Class FormPackingList
                     TextBoxJudul.Text = Dr.Item("Judul")
                     TextBoxPetugas.Text = Dr.Item("Petugas")
 
+                    Dim ObjRpt As New CrystalReportCetak
+                    ObjRpt.SetDataSource(Ds.Tables(0))
+                    FormCR.CrystalReportViewer1.ReportSource = ObjRpt
+                    FormCR.CrystalReportViewer1.Refresh()
+
+
+
+
+
                 Else
                     If MsgBox("Data Tidak Ada, Ulangi Pencarian?", MsgBoxStyle.YesNo, "Konfirmasi") = MsgBoxResult.Yes Then
                         ComboBoxCari.Text = ""
@@ -214,6 +240,12 @@ Public Class FormPackingList
                     TextBoxKodeBuku.Text = Dr.Item("KodeBuku")
                     TextBoxJudul.Text = Dr.Item("Judul")
                     TextBoxPetugas.Text = Dr.Item("Petugas")
+
+                    Dim ObjRpt As New CrystalReportCetak
+                    ObjRpt.SetDataSource(Ds.Tables(0))
+                    FormCR.CrystalReportViewer1.ReportSource = ObjRpt
+                    FormCR.CrystalReportViewer1.Refresh()
+
 
                 Else
                     If MsgBox("Data Tidak Ada, Ulangi Pencarian?", MsgBoxStyle.YesNo, "Konfirmasi") = MsgBoxResult.Yes Then
@@ -252,7 +284,7 @@ Public Class FormPackingList
                 Cmd = New SqlCommand(Simpan, Conn)
                 Cmd.ExecuteNonQuery()
                 Call RefreshDGVPL()
-                Call QtyPl()
+                'Call QtyPl()
                 Call CountRow()
                 TextBoxMasukanISBN.Text = ""
                 TextBoxMasukanQTY.Text = ""
@@ -312,10 +344,8 @@ Public Class FormPackingList
     End Sub
 
     Private Sub ButtonNewPL_Click(sender As Object, e As EventArgs) Handles ButtonNewPL.Click
-        TextBoxPalet.Text = ""
-        TextBoxKoli.Text = ""
-        TextBoxBox.Text = ""
-        TextBoxPetugas.Text = ""
+        Call BersihkanInput()
+
         TextBoxPalet.Enabled = True
         TextBoxPalet.ReadOnly = False
         TextBoxKoli.Enabled = True
@@ -324,6 +354,15 @@ Public Class FormPackingList
         TextBoxBox.ReadOnly = False
         TextBoxPetugas.Enabled = True
         TextBoxPetugas.ReadOnly = False
+        TextBoxMasukanISBN.Enabled = True
+        TextBoxMasukanISBN.ReadOnly = False
+
+        TextBoxMasukanQTY.Enabled = True
+        TextBoxMasukanQTY.ReadOnly = False
+
+
+
+        ButtonSave.Text = "Save"
     End Sub
 
     Private Sub TextBoxCari_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TextBoxCari.KeyPress
@@ -359,14 +398,16 @@ Public Class FormPackingList
         End With
     End Sub
 
+    Private Sub ButtonCetak_Click(sender As Object, e As EventArgs) Handles ButtonCetak.Click
+        FormCR.Show()
+    End Sub
 
-    'Private Sub PrintDocument1_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles PrintDocument1.PrintPage
-    '    Dim dataGridViewImage As New Bitmap(Me.DGV.Width, Me.DGV.Height)
-    '    DGV.DrawToBitmap(dataGridViewImage, New Rectangle(0, 0, Me.DGV.Width, Me.DGV.Height))
-    '    e.Graphics.DrawImage(dataGridViewImage, 0, 0)
-    'End Sub
+    Private Sub ButtonCetakPL_Click(sender As Object, e As EventArgs) Handles ButtonCetakPL.Click
+        'Call KonekDbINV()
+        'Dim CmdBantu As String = "SELECT TOP 1 Pl_Id FROM Packing_list ORDER BY Tanggal DESC"
+        'Cmd = New SqlCommand("SELECT * WHERE Pl_Id = '&CmdBantu'& ", Conn)
 
-    'Private Sub ButtonCetak_Click(sender As Object, e As EventArgs) Handles ButtonCetak.Click
-    '    PrintDocument1.Print()
-    'End Sub
+
+    End Sub
+
 End Class

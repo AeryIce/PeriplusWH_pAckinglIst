@@ -18,7 +18,7 @@ Imports System
 Imports System.ComponentModel
 
 
-Public Class PrintRekap
+Public Class CrystalReportCetak
     Inherits ReportClass
     
     Public Sub New()
@@ -27,7 +27,7 @@ Public Class PrintRekap
     
     Public Overrides Property ResourceName() As String
         Get
-            Return "PrintRekap.rpt"
+            Return "CrystalReportCetak.rpt"
         End Get
         Set
             'Do nothing
@@ -45,7 +45,7 @@ Public Class PrintRekap
     
     Public Overrides Property FullResourceName() As String
         Get
-            Return "PeriplusWH_pAckinglIst.PrintRekap.rpt"
+            Return "PeriplusWH_pAckinglIst.CrystalReportCetak.rpt"
         End Get
         Set
             'Do nothing
@@ -94,7 +94,7 @@ Public Class PrintRekap
 End Class
 
 <System.Drawing.ToolboxBitmapAttribute(GetType(CrystalDecisions.[Shared].ExportOptions), "report.bmp")>  _
-Public Class CachedPrintRekap
+Public Class CachedCrystalReportCetak
     Inherits Component
     Implements ICachedReport
     
@@ -136,7 +136,7 @@ Public Class CachedPrintRekap
     End Property
     
     Public Overridable Function CreateReport() As CrystalDecisions.CrystalReports.Engine.ReportDocument Implements CrystalDecisions.ReportSource.ICachedReport.CreateReport
-        Dim rpt As PrintRekap = New PrintRekap()
+        Dim rpt As CrystalReportCetak = New CrystalReportCetak()
         rpt.Site = Me.Site
         Return rpt
     End Function

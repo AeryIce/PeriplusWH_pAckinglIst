@@ -283,14 +283,6 @@ Partial Public Class INVDataSet1
     Partial Public Class Packing_ListDataTable
         Inherits Global.System.Data.TypedTableBase(Of Packing_ListRow)
         
-        Private columnPalet As Global.System.Data.DataColumn
-        
-        Private columnKoli As Global.System.Data.DataColumn
-        
-        Private columnBox As Global.System.Data.DataColumn
-        
-        Private columnPl_Id As Global.System.Data.DataColumn
-        
         Private columnPetugas As Global.System.Data.DataColumn
         
         Private columnISBN As Global.System.Data.DataColumn
@@ -302,6 +294,12 @@ Partial Public Class INVDataSet1
         Private columnQty As Global.System.Data.DataColumn
         
         Private columnTanggal As Global.System.Data.DataColumn
+        
+        Private columnSuplier As Global.System.Data.DataColumn
+        
+        Private columnPL_Toys As Global.System.Data.DataColumn
+        
+        Private columnRETNUMBER As Global.System.Data.DataColumn
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
@@ -337,38 +335,6 @@ Partial Public Class INVDataSet1
             MyBase.New(info, context)
             Me.InitVars
         End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public ReadOnly Property PaletColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnPalet
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public ReadOnly Property KoliColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnKoli
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public ReadOnly Property BoxColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnBox
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public ReadOnly Property Pl_IdColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnPl_Id
-            End Get
-        End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
@@ -419,6 +385,30 @@ Partial Public Class INVDataSet1
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property SuplierColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnSuplier
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property PL_ToysColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnPL_Toys
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property RETNUMBERColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnRETNUMBER
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -455,9 +445,9 @@ Partial Public Class INVDataSet1
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Overloads Function AddPacking_ListRow(ByVal Palet As String, ByVal Koli As String, ByVal Box As String, ByVal Pl_Id As String, ByVal Petugas As String, ByVal ISBN As String, ByVal KodeBuku As String, ByVal Judul As String, ByVal Qty As Integer, ByVal Tanggal As Date) As Packing_ListRow
+        Public Overloads Function AddPacking_ListRow(ByVal Petugas As String, ByVal ISBN As String, ByVal KodeBuku As String, ByVal Judul As String, ByVal Qty As Integer, ByVal Tanggal As Date, ByVal Suplier As String, ByVal PL_Toys As String, ByVal RETNUMBER As String) As Packing_ListRow
             Dim rowPacking_ListRow As Packing_ListRow = CType(Me.NewRow,Packing_ListRow)
-            Dim columnValuesArray() As Object = New Object() {Palet, Koli, Box, Pl_Id, Petugas, ISBN, KodeBuku, Judul, Qty, Tanggal}
+            Dim columnValuesArray() As Object = New Object() {Petugas, ISBN, KodeBuku, Judul, Qty, Tanggal, Suplier, PL_Toys, RETNUMBER}
             rowPacking_ListRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowPacking_ListRow)
             Return rowPacking_ListRow
@@ -480,29 +470,20 @@ Partial Public Class INVDataSet1
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Friend Sub InitVars()
-            Me.columnPalet = MyBase.Columns("Palet")
-            Me.columnKoli = MyBase.Columns("Koli")
-            Me.columnBox = MyBase.Columns("Box")
-            Me.columnPl_Id = MyBase.Columns("Pl_Id")
             Me.columnPetugas = MyBase.Columns("Petugas")
             Me.columnISBN = MyBase.Columns("ISBN")
             Me.columnKodeBuku = MyBase.Columns("KodeBuku")
             Me.columnJudul = MyBase.Columns("Judul")
             Me.columnQty = MyBase.Columns("Qty")
             Me.columnTanggal = MyBase.Columns("Tanggal")
+            Me.columnSuplier = MyBase.Columns("Suplier")
+            Me.columnPL_Toys = MyBase.Columns("PL_Toys")
+            Me.columnRETNUMBER = MyBase.Columns("RETNUMBER")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Private Sub InitClass()
-            Me.columnPalet = New Global.System.Data.DataColumn("Palet", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnPalet)
-            Me.columnKoli = New Global.System.Data.DataColumn("Koli", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnKoli)
-            Me.columnBox = New Global.System.Data.DataColumn("Box", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnBox)
-            Me.columnPl_Id = New Global.System.Data.DataColumn("Pl_Id", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnPl_Id)
             Me.columnPetugas = New Global.System.Data.DataColumn("Petugas", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnPetugas)
             Me.columnISBN = New Global.System.Data.DataColumn("ISBN", GetType(String), Nothing, Global.System.Data.MappingType.Element)
@@ -515,15 +496,20 @@ Partial Public Class INVDataSet1
             MyBase.Columns.Add(Me.columnQty)
             Me.columnTanggal = New Global.System.Data.DataColumn("Tanggal", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnTanggal)
-            Me.columnPalet.MaxLength = 10
-            Me.columnKoli.MaxLength = 10
-            Me.columnBox.MaxLength = 10
-            Me.columnPl_Id.ReadOnly = true
-            Me.columnPl_Id.MaxLength = 51
+            Me.columnSuplier = New Global.System.Data.DataColumn("Suplier", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnSuplier)
+            Me.columnPL_Toys = New Global.System.Data.DataColumn("PL_Toys", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnPL_Toys)
+            Me.columnRETNUMBER = New Global.System.Data.DataColumn("RETNUMBER", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnRETNUMBER)
             Me.columnPetugas.MaxLength = 50
             Me.columnISBN.MaxLength = 25
             Me.columnKodeBuku.MaxLength = 10
             Me.columnJudul.MaxLength = 100
+            Me.columnSuplier.MaxLength = 100
+            Me.columnPL_Toys.ReadOnly = true
+            Me.columnPL_Toys.MaxLength = 27
+            Me.columnRETNUMBER.MaxLength = 25
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -670,66 +656,6 @@ Partial Public Class INVDataSet1
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property Palet() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tablePacking_List.PaletColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'Palet' in table 'Packing_List' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tablePacking_List.PaletColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property Koli() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tablePacking_List.KoliColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'Koli' in table 'Packing_List' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tablePacking_List.KoliColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property Box() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tablePacking_List.BoxColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'Box' in table 'Packing_List' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tablePacking_List.BoxColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property Pl_Id() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tablePacking_List.Pl_IdColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'Pl_Id' in table 'Packing_List' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tablePacking_List.Pl_IdColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Property Petugas() As String
             Get
                 Try 
@@ -820,51 +746,48 @@ Partial Public Class INVDataSet1
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Function IsPaletNull() As Boolean
-            Return Me.IsNull(Me.tablePacking_List.PaletColumn)
-        End Function
+        Public Property Suplier() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tablePacking_List.SuplierColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Suplier' in table 'Packing_List' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tablePacking_List.SuplierColumn) = value
+            End Set
+        End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Sub SetPaletNull()
-            Me(Me.tablePacking_List.PaletColumn) = Global.System.Convert.DBNull
-        End Sub
+        Public Property PL_Toys() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tablePacking_List.PL_ToysColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'PL_Toys' in table 'Packing_List' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tablePacking_List.PL_ToysColumn) = value
+            End Set
+        End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Function IsKoliNull() As Boolean
-            Return Me.IsNull(Me.tablePacking_List.KoliColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Sub SetKoliNull()
-            Me(Me.tablePacking_List.KoliColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Function IsBoxNull() As Boolean
-            Return Me.IsNull(Me.tablePacking_List.BoxColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Sub SetBoxNull()
-            Me(Me.tablePacking_List.BoxColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Function IsPl_IdNull() As Boolean
-            Return Me.IsNull(Me.tablePacking_List.Pl_IdColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Sub SetPl_IdNull()
-            Me(Me.tablePacking_List.Pl_IdColumn) = Global.System.Convert.DBNull
-        End Sub
+        Public Property RETNUMBER() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tablePacking_List.RETNUMBERColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'RETNUMBER' in table 'Packing_List' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tablePacking_List.RETNUMBERColumn) = value
+            End Set
+        End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
@@ -936,6 +859,42 @@ Partial Public Class INVDataSet1
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetTanggalNull()
             Me(Me.tablePacking_List.TanggalColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsSuplierNull() As Boolean
+            Return Me.IsNull(Me.tablePacking_List.SuplierColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetSuplierNull()
+            Me(Me.tablePacking_List.SuplierColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsPL_ToysNull() As Boolean
+            Return Me.IsNull(Me.tablePacking_List.PL_ToysColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetPL_ToysNull()
+            Me(Me.tablePacking_List.PL_ToysColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsRETNUMBERNull() As Boolean
+            Return Me.IsNull(Me.tablePacking_List.RETNUMBERColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetRETNUMBERNull()
+            Me(Me.tablePacking_List.RETNUMBERColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     
@@ -1105,32 +1064,30 @@ Namespace INVDataSet1TableAdapters
             Dim tableMapping As Global.System.Data.Common.DataTableMapping = New Global.System.Data.Common.DataTableMapping()
             tableMapping.SourceTable = "Table"
             tableMapping.DataSetTable = "Packing_List"
-            tableMapping.ColumnMappings.Add("Palet", "Palet")
-            tableMapping.ColumnMappings.Add("Koli", "Koli")
-            tableMapping.ColumnMappings.Add("Box", "Box")
-            tableMapping.ColumnMappings.Add("Pl_Id", "Pl_Id")
             tableMapping.ColumnMappings.Add("Petugas", "Petugas")
             tableMapping.ColumnMappings.Add("ISBN", "ISBN")
             tableMapping.ColumnMappings.Add("KodeBuku", "KodeBuku")
             tableMapping.ColumnMappings.Add("Judul", "Judul")
             tableMapping.ColumnMappings.Add("Qty", "Qty")
             tableMapping.ColumnMappings.Add("Tanggal", "Tanggal")
+            tableMapping.ColumnMappings.Add("Suplier", "Suplier")
+            tableMapping.ColumnMappings.Add("PL_Toys", "PL_Toys")
+            tableMapping.ColumnMappings.Add("RETNUMBER", "RETNUMBER")
             Me._adapter.TableMappings.Add(tableMapping)
             Me._adapter.InsertCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
-            Me._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[Packing_List] ([Palet], [Koli], [Box], [Petugas], [ISBN], [Kod"& _ 
-                "eBuku], [Judul], [Qty], [Tanggal]) VALUES (@Palet, @Koli, @Box, @Petugas, @ISBN,"& _ 
-                " @KodeBuku, @Judul, @Qty, @Tanggal)"
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO [Packing_List] ([Petugas], [ISBN], [KodeBuku], [Judul], [Qty], [Tangg"& _ 
+                "al], [Suplier], [RETNUMBER]) VALUES (@Petugas, @ISBN, @KodeBuku, @Judul, @Qty, @"& _ 
+                "Tanggal, @Suplier, @RETNUMBER)"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Palet", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Palet", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Koli", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Koli", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Box", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Box", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Petugas", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Petugas", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ISBN", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ISBN", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@KodeBuku", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "KodeBuku", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Judul", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Judul", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Qty", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Qty", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Tanggal", Global.System.Data.SqlDbType.DateTime, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Tanggal", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Suplier", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Suplier", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETNUMBER", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "RETNUMBER", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -1146,8 +1103,8 @@ Namespace INVDataSet1TableAdapters
             Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(0) {}
             Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(0).Connection = Me.Connection
-            Me._commandCollection(0).CommandText = "SELECT Palet, Koli, Box, Pl_Id, Petugas, ISBN, KodeBuku, Judul, Qty, Tanggal FROM"& _ 
-                " dbo.Packing_List"
+            Me._commandCollection(0).CommandText = "SELECT     Petugas, ISBN, KodeBuku, Judul, Qty, Tanggal, Suplier, PL_Toys, RETNUM"& _ 
+                "BER"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM         Packing_List"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE     (RETNUMBER IS NOT NULL)"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
         End Sub
         
@@ -1207,51 +1164,46 @@ Namespace INVDataSet1TableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
-        Public Overloads Overridable Function Insert(ByVal Palet As String, ByVal Koli As String, ByVal Box As String, ByVal Petugas As String, ByVal ISBN As String, ByVal KodeBuku As String, ByVal Judul As String, ByVal Qty As Global.System.Nullable(Of Integer), ByVal Tanggal As Global.System.Nullable(Of Date)) As Integer
-            If (Palet Is Nothing) Then
+        Public Overloads Overridable Function Insert(ByVal Petugas As String, ByVal ISBN As String, ByVal KodeBuku As String, ByVal Judul As String, ByVal Qty As Global.System.Nullable(Of Integer), ByVal Tanggal As Global.System.Nullable(Of Date), ByVal Suplier As String, ByVal RETNUMBER As String) As Integer
+            If (Petugas Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(0).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(0).Value = CType(Palet,String)
-            End If
-            If (Koli Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(1).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.InsertCommand.Parameters(1).Value = CType(Koli,String)
-            End If
-            If (Box Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(2).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.InsertCommand.Parameters(2).Value = CType(Box,String)
-            End If
-            If (Petugas Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(3).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.InsertCommand.Parameters(3).Value = CType(Petugas,String)
+                Me.Adapter.InsertCommand.Parameters(0).Value = CType(Petugas,String)
             End If
             If (ISBN Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(4).Value = Global.System.DBNull.Value
+                Me.Adapter.InsertCommand.Parameters(1).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(4).Value = CType(ISBN,String)
+                Me.Adapter.InsertCommand.Parameters(1).Value = CType(ISBN,String)
             End If
             If (KodeBuku Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(5).Value = Global.System.DBNull.Value
+                Me.Adapter.InsertCommand.Parameters(2).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(5).Value = CType(KodeBuku,String)
+                Me.Adapter.InsertCommand.Parameters(2).Value = CType(KodeBuku,String)
             End If
             If (Judul Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(6).Value = Global.System.DBNull.Value
+                Me.Adapter.InsertCommand.Parameters(3).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(6).Value = CType(Judul,String)
+                Me.Adapter.InsertCommand.Parameters(3).Value = CType(Judul,String)
             End If
             If (Qty.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(7).Value = CType(Qty.Value,Integer)
+                Me.Adapter.InsertCommand.Parameters(4).Value = CType(Qty.Value,Integer)
             Else
-                Me.Adapter.InsertCommand.Parameters(7).Value = Global.System.DBNull.Value
+                Me.Adapter.InsertCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
             If (Tanggal.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(8).Value = CType(Tanggal.Value,Date)
+                Me.Adapter.InsertCommand.Parameters(5).Value = CType(Tanggal.Value,Date)
             Else
-                Me.Adapter.InsertCommand.Parameters(8).Value = Global.System.DBNull.Value
+                Me.Adapter.InsertCommand.Parameters(5).Value = Global.System.DBNull.Value
+            End If
+            If (Suplier Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(6).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(6).Value = CType(Suplier,String)
+            End If
+            If (RETNUMBER Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(7).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(7).Value = CType(RETNUMBER,String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
             If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
